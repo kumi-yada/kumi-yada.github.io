@@ -27,7 +27,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/commission-site/",
+              "baseHref": "/",
               "fileReplacements": [
                 {
                   "replace": "apps/art-commission/src/environments/environment.ts",
