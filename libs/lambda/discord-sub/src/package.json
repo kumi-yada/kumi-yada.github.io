@@ -1,9 +1,0 @@
-{
-  "name": "discord-sub",
-  "version": "1.0.0",
-  "main": "src/app.js",
-  "dependencies": {
-    "discord.js": "^12.5.3",
-    "@aws-sdk/client-ssm": "^3.42.0"
-  }
-}

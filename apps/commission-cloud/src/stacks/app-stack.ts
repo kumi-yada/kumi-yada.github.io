@@ -1,10 +1,12 @@
 import { CfnOutput, Construct, Stack, StackProps } from '@aws-cdk/core';
 import { HttpApi, HttpMethod, CorsHttpMethod } from '@aws-cdk/aws-apigatewayv2';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations';
-import { setupContactNotification } from './contact-stack';
 import { setupManagementFunctions } from './management-stack';
 import { HttpUserPoolAuthorizer } from '@aws-cdk/aws-apigatewayv2-authorizers';
+import { Runtime, Code, Function } from '@aws-cdk/aws-lambda';
+import { RetentionDays } from '@aws-cdk/aws-logs';
 import { Effect, PolicyStatement } from '@aws-cdk/aws-iam';
+import { join } from 'path';
 
 export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -24,10 +26,20 @@ export class AppStack extends Stack {
 
     const lambdaFolder = '../../dist/libs/lambda';
 
-    const { contactFunction, contactTopic } = setupContactNotification(
-      this,
-      lambdaFolder
-    );
+    const contactFunction = new Function(this, 'commissionContact', {
+      runtime: Runtime.NODEJS_14_X,
+      code: Code.fromAsset(join(lambdaFolder, 'commission-contact')),
+      handler: 'lambda-commission-contact.handler',
+      logRetention: RetentionDays.ONE_MONTH,
+    });
+
+    const ssmTrelloRead = new PolicyStatement({
+      effect: Effect.ALLOW,
+      actions: ['ssm:GetParameter'],
+      resources: ['arn:aws:ssm:eu-central-1:841152197398:parameter/trello_*'],
+    });
+    contactFunction.addToRolePolicy(ssmTrelloRead);
+
     api.addRoutes({
       path: '/contact',
       methods: [HttpMethod.POST],
@@ -70,6 +82,5 @@ export class AppStack extends Stack {
     );
 
     new CfnOutput(this, 'apiUrl', { value: api.url });
-    new CfnOutput(this, 'contactTopic', { value: contactTopic.topicArn });
   }
 }

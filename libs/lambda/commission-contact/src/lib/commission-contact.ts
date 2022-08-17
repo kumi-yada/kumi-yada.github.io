@@ -1,12 +1,13 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { PublishCommand, SNSClient } from '@aws-sdk/client-sns';
+import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
 import { InvokeCommand, LambdaClient } from '@aws-sdk/client-lambda';
 import {
   CommissionContact,
   CommissionMeta,
 } from '@commission-site/commission-shared';
+import axios from 'axios';
 
-const client = new SNSClient({ region: 'eu-central-1' });
+const client = new SSMClient({ region: 'eu-central-1' });
 const lambda = new LambdaClient({ region: 'eu-central-1' });
 
 export const error = (
@@ -65,12 +66,21 @@ export const handler = async ({
       return error('Validation failed', 400);
     }
 
-    await client.send(
-      new PublishCommand({
-        TopicArn: 'arn:aws:sns:eu-central-1:841152197398:artSubmission',
-        Message: body,
-      })
-    );
+    const key = await client.send(new GetParameterCommand({ Name: 'trello_key', WithDecryption: true }));
+    const token = await client.send(new GetParameterCommand({ Name: 'trello_token', WithDecryption: true }));
+
+    const query = new URLSearchParams({
+      idList: '62fd0f9e9f5b0f3415179305', // TODO: make it configurable
+      name: `Request from ${contact.name}`,
+      desc: `${contact.message}\n\nReply to ${contact.email}`,
+    });
+    console.log(query.toString());
+    await axios.post(`https://api.trello.com/1/cards?${query.toString()}`, null, {
+      headers: {
+        'Authorization': `OAuth oauth_consumer_key="${key.Parameter.Value}", oauth_token="${token.Parameter.Value}"`
+      }
+    });
+
     return success('Send successfully');
   } catch (err) {
     console.log(err);
