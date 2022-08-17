@@ -1,6 +1,3 @@
-import './image-view.module.scss';
-
-/* eslint-disable-next-line */
 export interface ImageViewProps {
   image: string;
   name?: string;

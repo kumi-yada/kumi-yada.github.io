@@ -1,7 +1,7 @@
 import { CommissionClient } from '@commission-site/commission-client';
 import { environment } from '../environments/environment';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import LandingPage from './landing-page/landing-page';
+import LandingPage from './landing/landing-page';
 import AdminPage from './admin-page/admin-page';
 
 const client = new CommissionClient(environment.commisionApi);

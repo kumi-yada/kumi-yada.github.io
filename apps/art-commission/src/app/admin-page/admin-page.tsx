@@ -1,7 +1,6 @@
 import { CommissionClient } from '@commission-site/commission-client';
 import { FormEvent, useEffect, useState } from 'react';
 import { environment } from '../../environments/environment';
-import './admin-page.module.scss';
 import { AuthService } from './auth-client';
 
 const auth = new AuthService({

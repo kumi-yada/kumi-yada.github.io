@@ -1,6 +1,5 @@
 import { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import './contact-form.module.scss';
 
 export interface ContactFormValue {
   name: string;

@@ -3,10 +3,9 @@ import { CommissionMeta } from '@commission-site/commission-shared';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
-import CommissionStatus from '../commission-status';
-import ContactForm, { ContactFormValue } from '../contact-form/contact-form';
-import Showcase from '../showcase/showcase';
-import './landing-page.module.scss';
+import CommissionStatus from './commission-status';
+import ContactForm, { ContactFormValue } from './contact-form';
+import Showcase from './showcase';
 
 export interface LandingPageProps {
   client: CommissionClient;

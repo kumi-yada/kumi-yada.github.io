@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import ImageView from '../image-view/image-view';
-import './showcase.module.scss';
+import ImageView from './image-view';
 
 /* eslint-disable-next-line */
 export interface ShowcaseProps {}
