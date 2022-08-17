@@ -8,15 +8,13 @@ const client = new CommissionClient(environment.commisionApi);
 
 export function App() {
   return (
-    <div id="wrapper">
-      <Routes>
-        <Route path="/">
-          <Route index element={<LandingPage client={client} />} />
-          <Route path="admin" element={<AdminPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Route>
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/">
+        <Route index element={<LandingPage client={client} />} />
+        <Route path="admin" element={<AdminPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Route>
+    </Routes>
   );
 }
 

@@ -36,7 +36,7 @@ export function LandingPage({ client }: LandingPageProps) {
 
   return (
     <>
-      <div className="row">
+      <div className="h-100 bg-white">
         <img
           src="https://placekitten.com/300/200"
           alt="profile"
