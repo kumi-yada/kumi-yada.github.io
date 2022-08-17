@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kumi Commissions</title>
+    <base href="/commission-site/">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles.0f3e823d5ce0642c4eb1.css"></head>
+  <body>
+    <div id="root"></div>
+  <script src="runtime.00a2e4173d24e5295f77.esm.js" type="module"></script><script src="polyfills.e074069f3f17510f0457.esm.js" type="module"></script><script src="main.f375042814c7dd729943.esm.js" type="module"></script></body>
+
+  <script>
+    (function () {
+      const redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        console.log(`Redirected from ${redirect}`);
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+</html>
