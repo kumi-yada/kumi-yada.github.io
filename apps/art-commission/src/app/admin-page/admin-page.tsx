@@ -21,6 +21,8 @@ export function AdminPage(props: AdminPageProps) {
   }
 
   const [commissionOpen, setCommissionOpen] = useState(false);
+  const [maxSlots, setMaxSlots] = useState(3);
+  const [filledSlots, setFilledSlots] = useState(0);
   const [status, setStatus] = useState('');
 
   const client = new CommissionClient(
@@ -31,6 +33,8 @@ export function AdminPage(props: AdminPageProps) {
   useEffect(() => {
     client.getCommissionMeta().then((meta) => {
       setCommissionOpen(meta.commissionOpen);
+      setMaxSlots(meta.maxSlots || 3);
+      setFilledSlots(meta.filledSlots || 0);
     });
   }, []);
 
@@ -39,6 +43,8 @@ export function AdminPage(props: AdminPageProps) {
     setStatus('');
     const response = await client.postCommissionMeta({
       commissionOpen,
+      maxSlots,
+      filledSlots,
     });
     if (response.status === 200) {
       setStatus('Saved');
@@ -58,6 +64,26 @@ export function AdminPage(props: AdminPageProps) {
             onChange={(e) => setCommissionOpen(e.target.checked)}
           />
           <label htmlFor="commissionOpen">Commission Open</label>
+        </div>
+
+        <div className="flex flex-row items-center gap-2">
+          <label htmlFor="commissionOpen">Slots</label>
+          <input
+            className="w-16"
+            type="number"
+            min="0"
+            max={maxSlots}
+            value={filledSlots}
+            onChange={(e) => setFilledSlots(parseInt(e.target.value))}
+          />
+          /
+          <input
+            className="w-16"
+            type="number"
+            min="0"
+            value={maxSlots}
+            onChange={(e) => setMaxSlots(parseInt(e.target.value))}
+          />
         </div>
 
         <div className="form-row inline">

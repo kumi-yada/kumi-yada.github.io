@@ -6,6 +6,8 @@ export interface CommissionContact {
 
 export interface CommissionMeta {
   commissionOpen: boolean;
+  maxSlots: number;
+  filledSlots: number;
 }
 
 export const commissionTable = 'CommissionTable';

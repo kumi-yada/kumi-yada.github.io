@@ -42,7 +42,7 @@ export const postHandler = async ({
 }: APIGatewayEvent): Promise<APIGatewayProxyResult> => {
   try {
     const meta = JSON.parse(body) as CommissionMeta;
-    if (!meta) {
+    if (!meta || meta.maxSlots < 0 || meta.filledSlots < 0 || meta.filledSlots > meta.maxSlots) {
       return { statusCode: 400, body: 'Validation failed' };
     }
 
