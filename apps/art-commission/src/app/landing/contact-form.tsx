@@ -70,38 +70,36 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
 
   // TODO: add validation
   return (
-    <form className="form" onSubmit={(e) => submit(e)}>
-      <div className="form-row">
+    <div className="p-4">
+      <form onSubmit={(e) => submit(e)} className="flex flex-col gap-2">
         <label htmlFor="contact-name">{t('contact.name')} *</label>
         <input
           id="contact-name"
           type="text"
+          className="border px-2 py-1 disabled:bg-slate-200"
           disabled={inputDisabled}
           value={name}
           required
           maxLength={maxLength}
           onChange={(e) => setName(e.target.value)}
         />
-      </div>
 
-      <div className="form-row">
         <label htmlFor="contact-email">{t('contact.email')} *</label>
         <input
           id="contact-email"
           type="text"
           disabled={inputDisabled}
+          className="border px-2 py-1 disabled:bg-slate-200"
           value={email}
           required
           maxLength={maxLength}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div>
 
-      <div className="form-row">
         <label htmlFor="contact-message">{t('contact.message')} *</label>
         <textarea
           id="contact-message"
-          className="resize-none"
+          className="border px-2 py-1 disabled:bg-slate-200"
           disabled={inputDisabled}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -109,21 +107,23 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           required
           maxLength={maxMessageLength}
         />
-        <span className="status note">
+        <span className="text-xs text-gray-400">
           {message.length}/{maxMessageLength}
         </span>
-      </div>
 
-      <div className="form-row">
-        <div>
-          <button type="submit" disabled={inputDisabled}>
-            {t('button.submit')}
-          </button>
-        </div>
-      </div>
+        <button
+          type="submit"
+          disabled={inputDisabled}
+          className="disabled:bg-sky-300 bg-sky-600 p-2 rounded-sm text-white"
+        >
+          {t('button.submit')}
+        </button>
 
-      {statusMessage && <span className="status">{statusMessage}</span>}
-    </form>
+        {statusMessage && (
+          <span className="text-xs text-red-800">{statusMessage}</span>
+        )}
+      </form>
+    </div>
   );
 }
 

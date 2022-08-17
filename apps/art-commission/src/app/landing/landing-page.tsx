@@ -20,7 +20,7 @@ export function LandingPage({ client }: LandingPageProps) {
       .getCommissionMeta()
       .then((meta) => setCommissionmeta(meta))
       .catch(() => setCommissionmeta(null));
-  });
+  }, []);
 
   const sendContact = async (contact: ContactFormValue) => {
     await client.sendContactMessage(contact);
@@ -35,40 +35,46 @@ export function LandingPage({ client }: LandingPageProps) {
   ];
 
   return (
-    <div className="flex flex-col w-50 bg-white">
-      <div>
-        <img
-          src="https://placekitten.com/300/200"
-          alt="profile"
-          className="max-w-xs mx-auto"
-        />
-        <div className="text-center">
-          <h1 className="uppercase">Kumi</h1>
-          <div className="flex flex-row justify-center p-2 gap-2">
-            {socialMedia.map((link) => (
-              <SocialIcon
-                style={{ width: ' 2.5em', height: '2.5em' }}
-                url={link}
-              />
-            ))}
-          </div>
-          <p>{t('landing.description')}</p>
-
-          {meta && <CommissionStatus meta={meta} />}
-        </div>
-      </div>
-
-      <Showcase />
-
-      {meta && (
-        <div className="row">
-          <CommissionStatus meta={meta} />
-          <ContactForm
-            onSubmit={sendContact}
-            disabled={!meta.commissionOpen || meta.filledSlots >= meta.maxSlots}
+    <div className="bg-slate-900 flex flex-col items-center p-4">
+      <div className="flex flex-col w-full md:w-1/2 bg-white rounded-md">
+        <div className="p-4">
+          <img
+            src="https://placekitten.com/300/200"
+            alt="profile"
+            className="max-w-xs mx-auto"
           />
+          <div className="text-center">
+            <h1 className="uppercase">Kumi</h1>
+            <div className="flex flex-row justify-center p-2 gap-2">
+              {socialMedia.map((link) => (
+                <SocialIcon
+                  style={{ width: ' 2.5em', height: '2.5em' }}
+                  url={link}
+                />
+              ))}
+            </div>
+            <p>{t('landing.description')}</p>
+
+            {meta && <CommissionStatus meta={meta} />}
+          </div>
         </div>
-      )}
+
+        <h1 className="font-bold text-xl text-center p-4">Portfolio</h1>
+        <Showcase />
+
+        {meta && (
+          <>
+            <CommissionStatus meta={meta} />
+            <h1 className="font-bold text-xl text-center p-4">Contact</h1>
+            <ContactForm
+              onSubmit={sendContact}
+              disabled={
+                !meta.commissionOpen || meta.filledSlots >= meta.maxSlots
+              }
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 }

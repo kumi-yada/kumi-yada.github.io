@@ -24,7 +24,7 @@ export function Showcase(props: ShowcaseProps) {
     const url = createImgUrl(i);
     return (
       <div
-        className="overflow-hidden bg-cover w-1/2 md:w-1/4 h-50v md:h-25v"
+        className="overflow-hidden bg-cover w-1/2 h-50v md:h-25v"
         style={{
           backgroundImage: `url(${url})`,
           backgroundPosition: 'center 25%',

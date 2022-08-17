@@ -11,7 +11,7 @@ export function CommissionSlots({ meta }: CommissionSlotsProps) {
   const slots = `${t('landing.slots')}: ${meta.filledSlots} / ${meta.maxSlots}`;
   const full = meta.filledSlots >= meta.maxSlots;
 
-  return <span>{(full && t('landing.fullSlots')) || slots}</span>;
+  return <span>{(full && t('landing.fullSlots')) || ''}</span>;
 }
 
 export default CommissionSlots;

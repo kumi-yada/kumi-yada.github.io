@@ -16,11 +16,7 @@ export function CommissionStatus({ meta }: CommissionStatusProps) {
       t('landing.closed')
     );
 
-  const color = meta?.commissionOpen ? '' : 'text-red-700';
-
-  return (
-    <div className={`text-xl font-bold p-4 text-center ${color}`}>{status}</div>
-  );
+  return <p className={`pt-4 text-center font-bold text-red-800`}>{status}</p>;
 }
 
 export default CommissionStatus;
