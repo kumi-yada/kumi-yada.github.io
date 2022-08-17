@@ -120,7 +120,13 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
         </button>
 
         {statusMessage && (
-          <span className="text-xs text-red-800">{statusMessage}</span>
+          <span
+            className={`text-xs ${
+              status === ContactStatus.ERROR ? 'text-red-800' : ''
+            }`}
+          >
+            {statusMessage}
+          </span>
         )}
       </form>
     </div>
