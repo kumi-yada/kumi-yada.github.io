@@ -1,7 +1,6 @@
 import { APIGatewayEvent, APIGatewayProxyResult } from 'aws-lambda';
 import {
   DynamoDBClient,
-  GetItemCommand,
   PutItemCommand,
 } from '@aws-sdk/client-dynamodb';
 import {
@@ -9,31 +8,35 @@ import {
   commissionTable,
   commissionTableKey,
   CommissionMeta,
+  slotsList,
+  queueList,
+  trelloHeaders,
 } from '@commission-site/commission-shared';
-
-const client = new DynamoDBClient({
-  region: 'eu-central-1',
-});
+import axios from 'axios';
 
 export const getHandler = async (): Promise<APIGatewayProxyResult> => {
   try {
-    const response = await client.send(
-      new GetItemCommand({
-        TableName: commissionTable,
-        Key: {
-          [commissionTableKey]: { S: commissionMetaColumn },
-        },
-      })
-    );
+    const urls = [
+      `/lists/${slotsList}?fields=softLimit`,
+      `/lists/${slotsList}/cards`,
+      `/lists/${queueList}?fields=softLimit`,
+      `/lists/${queueList}/cards`,
+    ];
+    const { data } = await axios.get(`https://api.trello.com/1/batch?urls=${urls.join(',')}`, { headers: await trelloHeaders() });
 
-    const data = JSON.parse(response.Item.data.S);
+    const meta: CommissionMeta = {
+      commissionOpen: data[3]['200'].length < (data[2]['200'].softLimit || 0),
+      filledSlots: data[1]['200'].length,
+      maxSlots: data[0]['200'].softLimit,
+    };
+
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(meta),
     };
   } catch (err) {
     console.log(err);
-    return { statusCode: 500, body: err };
+    return { statusCode: 500, body: 'request failed' };
   }
 };
 
@@ -46,6 +49,9 @@ export const postHandler = async ({
       return { statusCode: 400, body: 'Validation failed' };
     }
 
+    const client = new DynamoDBClient({
+      region: 'eu-central-1',
+    });
     await client.send(
       new PutItemCommand({
         TableName: commissionTable,

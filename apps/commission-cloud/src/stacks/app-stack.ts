@@ -1,12 +1,17 @@
 import { CfnOutput, Construct, Stack, StackProps } from '@aws-cdk/core';
 import { HttpApi, HttpMethod, CorsHttpMethod } from '@aws-cdk/aws-apigatewayv2';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations';
-import { setupManagementFunctions } from './management-stack';
 import { HttpUserPoolAuthorizer } from '@aws-cdk/aws-apigatewayv2-authorizers';
 import { Runtime, Code, Function } from '@aws-cdk/aws-lambda';
 import { RetentionDays } from '@aws-cdk/aws-logs';
 import { Effect, PolicyStatement } from '@aws-cdk/aws-iam';
 import { join } from 'path';
+import { AttributeType, Table } from '@aws-cdk/aws-dynamodb';
+import { UserPool } from '@aws-cdk/aws-cognito';
+import {
+  commissionTable,
+  commissionTableKey,
+} from '../../../../libs/commission-shared/src';
 
 export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -46,11 +51,37 @@ export class AppStack extends Stack {
       integration: new HttpLambdaIntegration('postContact', contactFunction),
     });
 
-    const {
-      getCommissionMetaFunction,
-      postCommissionMetaFunction,
-      managementUserPool,
-    } = setupManagementFunctions(this, lambdaFolder);
+    const table = new Table(this, 'commissionTable', {
+      tableName: commissionTable,
+      partitionKey: {
+        name: commissionTableKey,
+        type: AttributeType.STRING,
+      },
+    });
+
+    const getCommissionMetaFunction = new Function(this, 'getCommissionMeta', {
+      functionName: 'GetCommissionMeta',
+      runtime: Runtime.NODEJS_14_X,
+      code: Code.fromAsset(join(lambdaFolder, 'commission-meta')),
+      handler: 'lambda-commission-meta.getHandler',
+      logRetention: RetentionDays.ONE_MONTH,
+    });
+    getCommissionMetaFunction.addToRolePolicy(ssmTrelloRead);
+
+    table.grantReadData(getCommissionMetaFunction);
+
+    const postCommissionMetaFunction = new Function(this, 'postCommissionMeta', {
+      runtime: Runtime.NODEJS_14_X,
+      code: Code.fromAsset(join(lambdaFolder, 'commission-meta')),
+      handler: 'lambda-commission-meta.postHandler',
+      logRetention: RetentionDays.ONE_MONTH,
+    });
+
+    table.grantWriteData(postCommissionMetaFunction);
+
+    const managementUserPool = new UserPool(this, 'managementUserPool', {
+      userPoolName: 'managementUserPool',
+    });
     api.addRoutes({
       path: '/commission-meta',
       methods: [HttpMethod.GET],
