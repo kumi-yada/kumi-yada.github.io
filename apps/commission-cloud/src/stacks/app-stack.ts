@@ -21,7 +21,7 @@ export class AppStack extends Stack {
       corsPreflight: {
         allowOrigins: [
           'http://localhost:4200',
-          'https://sakkaku-web.github.io',
+          'https://kumi-yada.github.io',
         ],
         allowHeaders: ['Authorization'],
         allowMethods: [CorsHttpMethod.ANY],
