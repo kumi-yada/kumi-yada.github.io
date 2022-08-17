@@ -1,8 +1,9 @@
 import { CommissionClient } from '@commission-site/commission-client';
+import { CommissionMeta } from '@commission-site/commission-shared';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
-import ClosedStatus from '../closed-status/closed-status';
+import CommissionStatus from '../commission-status';
 import ContactForm, { ContactFormValue } from '../contact-form/contact-form';
 import Showcase from '../showcase/showcase';
 import './landing-page.module.scss';
@@ -13,14 +14,13 @@ export interface LandingPageProps {
 
 export function LandingPage({ client }: LandingPageProps) {
   const { t } = useTranslation();
-  const [commissionOpen, setCommissionOpen] = useState(true as boolean | null);
-  const showClosed = !commissionOpen;
+  const [meta, setCommissionmeta] = useState(null as CommissionMeta | null);
 
   useEffect(() => {
     client
       .getCommissionMeta()
-      .then((meta) => setCommissionOpen(meta.commissionOpen))
-      .catch(() => setCommissionOpen(null));
+      .then((meta) => setCommissionmeta(meta))
+      .catch(() => setCommissionmeta(null));
   });
 
   const sendContact = async (contact: ContactFormValue) => {
@@ -55,16 +55,21 @@ export function LandingPage({ client }: LandingPageProps) {
           </div>
           <p>{t('landing.description')}</p>
 
-          <ClosedStatus show={showClosed} />
+          {meta && <CommissionStatus meta={meta} />}
         </div>
       </div>
 
       <Showcase />
 
-      <div className="row">
-        <ClosedStatus show={showClosed} />
-        <ContactForm onSubmit={sendContact} disabled={!commissionOpen} />
-      </div>
+      {meta && (
+        <div className="row">
+          <CommissionStatus meta={meta} />
+          <ContactForm
+            onSubmit={sendContact}
+            disabled={!meta.commissionOpen || meta.filledSlots >= meta.maxSlots}
+          />
+        </div>
+      )}
     </>
   );
 }
