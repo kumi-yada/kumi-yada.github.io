@@ -16,26 +16,7 @@ export function Terms() {
   return (
     <div>
       <CardHeader backTo="/">Terms of Service</CardHeader>
-      {/* Frame Size
-      <ul>
-        <li>Profile</li>
-        <li>Half Body</li>
-        <li>Full Body</li>
-      </ul>
-      Level of Detail
-      <ul>
-        <li>Line Art</li>
-        <li>Simple Color</li>
-        <li>Illustration</li>
-      </ul> */}
       <div className="p-4">
-        <ul className="list-disc list-inside leading-10">
-          <li>
-            I usually finish the drawing in 1-2 weeks but I cannot guarantee it
-          </li>
-          <li>Commissions are for personal-use only</li>
-        </ul>
-
         <Timeline position="alternate">
           <TimelineItem>
             <TimelineSeparator>
@@ -46,10 +27,11 @@ export function Terms() {
             </TimelineSeparator>
             <TimelineContent>
               Request
-              <p className="text-xs text-slate-500">
-                only accept fanart of existing characters right now.
-                <p>I don't take rush orders.</p>
-              </p>
+              <ul className="text-xs text-slate-500 list-disc list-inside">
+                <li>for personal-use</li>
+                <li>only accept fanart of existing characters right now.</li>
+                <li>I don't take rush orders.</li>
+              </ul>
             </TimelineContent>
           </TimelineItem>
           <TimelineItem>
@@ -60,10 +42,11 @@ export function Terms() {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              Approved and Paid
-              <p className="text-xs text-slate-500">
-                full payment upfront via Paypal, refund only max 50%
-              </p>
+              Payment
+              <ul className="text-xs text-slate-500 list-disc list-inside">
+                <li>full payment upfront via Paypal</li>
+                <li>refund only max 50%</li>
+              </ul>
             </TimelineContent>
           </TimelineItem>
           <TimelineItem>
@@ -75,9 +58,10 @@ export function Terms() {
             </TimelineSeparator>
             <TimelineContent>
               Review Sketch
-              <p className="text-xs text-slate-500">
-                revisions and cancellation discussable, but not after
-              </p>
+              <ul className="text-xs text-slate-500 list-disc list-inside">
+                <li>revisions and cancellation discussable</li>
+                <li>no major changes after sketch approved</li>
+              </ul>
             </TimelineContent>
           </TimelineItem>
           <TimelineItem>
@@ -87,8 +71,11 @@ export function Terms() {
               </TimelineDot>
             </TimelineSeparator>
             <TimelineContent>
-              Deliver final PNG
-              <p className="text-xs text-slate-500">usually in A4 size</p>
+              Deliver
+              <ul className="text-xs text-slate-500 list-disc list-inside">
+                <li>usually within 1-2 weeks but no guarantee</li>
+                <li>final PNG in A4 size</li>
+              </ul>
             </TimelineContent>
           </TimelineItem>
         </Timeline>

@@ -8,8 +8,8 @@ interface CardHeaderProps extends PropsWithChildren {
 
 export function CardHeader({ children, backTo }: CardHeaderProps) {
   return (
-    <div className="border-b p-4 font-bold flex flex-row gap-4 items-center">
-      <Link to={backTo}>
+    <div className="border-b font-bold flex flex-row gap-4 items-center">
+      <Link to={backTo} className="p-4">
         <FaArrowLeft />
       </Link>
       {children}

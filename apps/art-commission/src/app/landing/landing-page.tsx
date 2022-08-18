@@ -15,8 +15,8 @@ export function LandingPage({ meta }: LandingPageProps) {
   const socialMedia = [
     'https://twitter.com/kumi_yada',
     'https://www.pixiv.net/users/58480310',
-    'https://www.instagram.com/kumi_yada93',
-    'https://www.youtube.com/channel/UCGhrMdAkUHi_8nc7qz_nE5Q',
+    // 'https://www.instagram.com/kumi_yada93',
+    // 'https://www.youtube.com/channel/UCGhrMdAkUHi_8nc7qz_nE5Q',
     'https://kumi.fanbox.cc/',
   ];
 
@@ -46,7 +46,7 @@ export function LandingPage({ meta }: LandingPageProps) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 m-4 items-center">
+      <div className="flex flex-col gap-4 m-4 items-center">
         <LinkButton to="/request">Request Commission</LinkButton>
         <LinkButton to="/tos">Terms of Service</LinkButton>
       </div>
