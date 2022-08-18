@@ -10,7 +10,7 @@ export function LinkButton({ to, children }: LinkButtonProps) {
   return (
     <Link
       to={to}
-      className="rounded-full bg-slate-300 border px-4 py-2 flex flex-row items-center gap-4"
+      className="rounded-full bg-sky-800 text-white px-4 py-2 flex flex-row items-center gap-4"
     >
       {children}
       <FaArrowRight />

@@ -68,15 +68,17 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
 
   const inputDisabled = sending || disabled;
 
-  // TODO: add validation
   return (
     <div className="p-4">
       <form onSubmit={(e) => submit(e)} className="flex flex-col gap-2">
-        <label htmlFor="contact-name">{t('contact.name')} *</label>
+        <label htmlFor="contact-name" className="font-semibold">
+          {t('contact.name')}{' '}
+          <span className="text-red-600 font-normal">*</span>
+        </label>
         <input
           id="contact-name"
           type="text"
-          className="border px-2 py-1 disabled:bg-slate-200"
+          className="border px-2 py-1 disabled:bg-slate-200 text-sm"
           disabled={inputDisabled}
           value={name}
           required
@@ -85,12 +87,15 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           onChange={(e) => setName(e.target.value)}
         />
 
-        <label htmlFor="contact-email">{t('contact.contact')} *</label>
+        <label htmlFor="contact-email" className="font-semibold">
+          {t('contact.contact')}{' '}
+          <span className="text-red-600 font-normal">*</span>
+        </label>
         <input
           id="contact-email"
           type="text"
           disabled={inputDisabled}
-          className="border px-2 py-1 disabled:bg-slate-200"
+          className="border px-2 py-1 disabled:bg-slate-200 text-sm"
           value={email}
           required
           maxLength={maxLength}
@@ -98,10 +103,13 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label htmlFor="contact-message">{t('contact.message')} *</label>
+        <label htmlFor="contact-message" className="font-semibold">
+          {t('contact.message')}{' '}
+          <span className="text-red-600 font-normal">*</span>
+        </label>
         <textarea
           id="contact-message"
-          className="border px-2 py-1 disabled:bg-slate-200"
+          className="border px-2 py-1 disabled:bg-slate-200 text-sm"
           disabled={inputDisabled}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -114,13 +122,15 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           {message.length}/{maxMessageLength}
         </span>
 
-        <button
-          type="submit"
-          disabled={inputDisabled}
-          className="disabled:bg-slate-500 bg-sky-800 p-2 rounded-sm text-white"
-        >
-          {t('button.submit')}
-        </button>
+        <div>
+          <button
+            type="submit"
+            disabled={inputDisabled}
+            className="disabled:bg-slate-600 bg-sky-800 py-2 px-4 rounded-sm text-white"
+          >
+            {t('button.submit')}
+          </button>
+        </div>
 
         {statusMessage && (
           <span
