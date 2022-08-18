@@ -1,16 +1,17 @@
 import { CommissionMeta } from '@commission-site/commission-shared';
 import { useTranslation } from 'react-i18next';
 
-export interface CommissionStatusProps {
+export interface CommissionStatusMessageProps {
   meta: CommissionMeta | null;
 }
 
-export function CommissionStatus({ meta }: CommissionStatusProps) {
+export function CommissionStatusMessage({
+  meta,
+}: CommissionStatusMessageProps) {
   const { t } = useTranslation();
 
-  const full = meta && meta.filledSlots >= meta.maxSlots;
   const open = meta?.commissionOpen;
-  const status = open ? full && t('landing.fullSlots') : t('landing.closed');
+  const status = open ? '' : t('landing.closed');
 
   if (!status) {
     return <></>;
@@ -20,4 +21,4 @@ export function CommissionStatus({ meta }: CommissionStatusProps) {
   return <p className={`pt-4 text-center font-bold ${color}`}>{status}</p>;
 }
 
-export default CommissionStatus;
+export default CommissionStatusMessage;

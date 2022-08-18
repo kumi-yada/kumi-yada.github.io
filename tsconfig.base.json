@@ -29,6 +29,9 @@
       ],
       "@commission-site/lambda/commission-meta": [
         "libs/lambda/commission-meta/src/index.ts"
+      ],
+      "@commission-site/lambda/commission-status": [
+        "libs/lambda/commission-status/src/index.ts"
       ]
     }
   },

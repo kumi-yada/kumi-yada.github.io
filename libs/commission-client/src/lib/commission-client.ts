@@ -1,39 +1,36 @@
 import {
   CommissionContact,
   CommissionMeta,
+  CommissionStatus,
 } from '@commission-site/commission-shared';
 
 export class CommissionClient {
-  constructor(private baseUrl: string, private token?: string | null) {}
+  constructor(private baseUrl: string) {}
 
   async sendContactMessage(contact: CommissionContact): Promise<string> {
     return fetch(`${this.baseUrl}/contact`, {
       method: 'POST',
       body: JSON.stringify(contact),
     })
-      .then((req) => req.json())
+      .then(this.parseOrThrow)
       .then((data) => data.id);
   }
 
   async getCommissionMeta(): Promise<CommissionMeta> {
-    return fetch(`${this.baseUrl}/commission-meta`).then((r) => r.json());
+    return fetch(`${this.baseUrl}/commission-meta`).then(this.parseOrThrow);
   }
 
-  async postCommissionMeta(meta: CommissionMeta): Promise<Response> {
-    return fetch(`${this.baseUrl}/commission-meta`, {
-      method: 'POST',
-      body: JSON.stringify(meta),
-      headers: this.baseHeaders(),
-    });
+  async getCommissionStatus(id: string): Promise<CommissionStatus> {
+    return fetch(`${this.baseUrl}/commission-status/${id}`).then(
+      this.parseOrThrow
+    );
   }
 
-  private baseHeaders() {
-    if (!this.token) {
-      return undefined;
+  private parseOrThrow(response: Response) {
+    if (response.status !== 200) {
+      throw new Error();
     }
 
-    return new Headers({
-      Authorization: this.token,
-    });
+    return response.json();
   }
 }

@@ -1,17 +1,10 @@
 import { CfnOutput, Construct, Stack, StackProps } from '@aws-cdk/core';
 import { HttpApi, HttpMethod, CorsHttpMethod } from '@aws-cdk/aws-apigatewayv2';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations';
-import { HttpUserPoolAuthorizer } from '@aws-cdk/aws-apigatewayv2-authorizers';
 import { Runtime, Code, Function } from '@aws-cdk/aws-lambda';
 import { RetentionDays } from '@aws-cdk/aws-logs';
 import { Effect, PolicyStatement } from '@aws-cdk/aws-iam';
 import { join } from 'path';
-import { AttributeType, Table } from '@aws-cdk/aws-dynamodb';
-import { UserPool } from '@aws-cdk/aws-cognito';
-import {
-  commissionTable,
-  commissionTableKey,
-} from '../../../../libs/commission-shared/src';
 
 export class AppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -19,10 +12,7 @@ export class AppStack extends Stack {
 
     const api = new HttpApi(this, 'commissionApi', {
       corsPreflight: {
-        allowOrigins: [
-          'http://localhost:4200',
-          'https://kumi-yada.github.io',
-        ],
+        allowOrigins: ['http://localhost:4200', 'https://kumi-yada.github.io'],
         allowHeaders: ['Authorization'],
         allowMethods: [CorsHttpMethod.ANY],
         allowCredentials: true,
@@ -51,14 +41,6 @@ export class AppStack extends Stack {
       integration: new HttpLambdaIntegration('postContact', contactFunction),
     });
 
-    const table = new Table(this, 'commissionTable', {
-      tableName: commissionTable,
-      partitionKey: {
-        name: commissionTableKey,
-        type: AttributeType.STRING,
-      },
-    });
-
     const getCommissionMetaFunction = new Function(this, 'getCommissionMeta', {
       functionName: 'GetCommissionMeta',
       runtime: Runtime.NODEJS_14_X,
@@ -68,20 +50,6 @@ export class AppStack extends Stack {
     });
     getCommissionMetaFunction.addToRolePolicy(ssmTrelloRead);
 
-    table.grantReadData(getCommissionMetaFunction);
-
-    const postCommissionMetaFunction = new Function(this, 'postCommissionMeta', {
-      runtime: Runtime.NODEJS_14_X,
-      code: Code.fromAsset(join(lambdaFolder, 'commission-meta')),
-      handler: 'lambda-commission-meta.postHandler',
-      logRetention: RetentionDays.ONE_MONTH,
-    });
-
-    table.grantWriteData(postCommissionMetaFunction);
-
-    const managementUserPool = new UserPool(this, 'managementUserPool', {
-      userPoolName: 'managementUserPool',
-    });
     api.addRoutes({
       path: '/commission-meta',
       methods: [HttpMethod.GET],
@@ -91,18 +59,21 @@ export class AppStack extends Stack {
       ),
     });
 
-    const authorizer = new HttpUserPoolAuthorizer(
-      'managementAuthorizer',
-      managementUserPool
-    );
+    const getCommissionStatus = new Function(this, 'getCommissionStatus', {
+      runtime: Runtime.NODEJS_14_X,
+      code: Code.fromAsset(join(lambdaFolder, 'commission-status')),
+      handler: 'lambda-commission-status.handler',
+      logRetention: RetentionDays.ONE_MONTH,
+    });
+    getCommissionStatus.addToRolePolicy(ssmTrelloRead);
+
     api.addRoutes({
-      path: '/commission-meta',
-      methods: [HttpMethod.POST],
+      path: '/commission-status/{id}',
+      methods: [HttpMethod.GET],
       integration: new HttpLambdaIntegration(
-        'postCommissionMeta',
-        postCommissionMetaFunction
+        'getCommissionStatus',
+        getCommissionStatus
       ),
-      authorizer,
     });
 
     contactFunction.addToRolePolicy(

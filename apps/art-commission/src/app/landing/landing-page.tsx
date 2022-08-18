@@ -1,7 +1,7 @@
 import { CommissionMeta } from '@commission-site/commission-shared';
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
-import CommissionStatus from '../components/commission-status';
+import CommissionStatusMessage from '../components/commission-status';
 import { LinkButton } from '../components/link-button';
 import Showcase from './showcase';
 
@@ -42,7 +42,7 @@ export function LandingPage({ meta }: LandingPageProps) {
             ))}
           </div>
 
-          <CommissionStatus meta={meta} />
+          <CommissionStatusMessage meta={meta} />
         </div>
       </div>
 

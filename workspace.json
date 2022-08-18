@@ -8,7 +8,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:webpack",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/art-commission",
             "index": "apps/art-commission/src/index.html",
@@ -21,7 +23,9 @@
               "apps/art-commission/src/assets",
               "apps/art-commission/src/404.html"
             ],
-            "styles": ["apps/art-commission/src/styles.scss"],
+            "styles": [
+              "apps/art-commission/src/styles.scss"
+            ],
             "scripts": [],
             "webpackConfig": "apps/art-commission/webpack.config.js",
             "postcssConfig": "apps/art-commission/postcss.config.js"
@@ -71,14 +75,20 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/art-commission/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/art-commission/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/art-commission"],
+          "outputs": [
+            "coverage/apps/art-commission"
+          ],
           "options": {
             "jestConfig": "apps/art-commission/jest.config.ts",
             "passWithNoTests": true
@@ -94,14 +104,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/commission-client/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/commission-client/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/commission-client"],
+          "outputs": [
+            "coverage/libs/commission-client"
+          ],
           "options": {
             "jestConfig": "libs/commission-client/jest.config.ts",
             "passWithNoTests": true
@@ -139,7 +155,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/commission-cloud"],
+          "outputs": [
+            "coverage/apps/commission-cloud"
+          ],
           "options": {
             "jestConfig": "apps/commission-cloud/jest.config.ts",
             "passWithNoTests": true
@@ -155,14 +173,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/commission-shared/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/commission-shared/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/commission-shared"],
+          "outputs": [
+            "coverage/libs/commission-shared"
+          ],
           "options": {
             "jestConfig": "libs/commission-shared/jest.config.ts",
             "passWithNoTests": true
@@ -178,14 +202,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/lambda/commission-contact/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/lambda/commission-contact/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/lambda/commission-contact"],
+          "outputs": [
+            "coverage/libs/lambda/commission-contact"
+          ],
           "options": {
             "jestConfig": "libs/lambda/commission-contact/jest.config.ts",
             "passWithNoTests": true
@@ -209,14 +239,20 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["libs/lambda/commission-meta/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/lambda/commission-meta/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/lambda/commission-meta"],
+          "outputs": [
+            "coverage/libs/lambda/commission-meta"
+          ],
           "options": {
             "jestConfig": "libs/lambda/commission-meta/jest.config.ts",
             "passWithNoTests": true
@@ -228,6 +264,43 @@
             "entryFile": "libs/lambda/commission-meta/src/index.ts",
             "tsConfig": "libs/lambda/commission-meta/tsconfig.lib.json",
             "outputPath": "dist/libs/lambda/commission-meta"
+          }
+        }
+      },
+      "tags": []
+    },
+    "lambda-commission-status": {
+      "root": "libs/lambda/commission-status",
+      "sourceRoot": "libs/lambda/commission-status/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/lambda/commission-status/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/lambda/commission-status"
+          ],
+          "options": {
+            "jestConfig": "libs/lambda/commission-status/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "package": {
+          "executor": "@myin/aws-cdk:package",
+          "options": {
+            "entryFile": "libs/lambda/commission-status/src/index.ts",
+            "tsConfig": "libs/lambda/commission-status/tsconfig.lib.json",
+            "outputPath": "dist/libs/lambda/commission-status"
           }
         }
       },
