@@ -1,10 +1,9 @@
 import { CommissionMeta } from '@commission-site/commission-shared';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import { SocialIcon } from 'react-social-icons';
 import CommissionStatus from '../components/commission-status';
+import { LinkButton } from '../components/link-button';
 import Showcase from './showcase';
-import { FaArrowRight } from 'react-icons/fa';
 
 export interface LandingPageProps {
   meta: CommissionMeta | null;
@@ -23,40 +22,35 @@ export function LandingPage({ meta }: LandingPageProps) {
 
   return (
     <>
-      <div className="p-4">
+      <div className="p-4 flex flex-col gap-4">
         <img
-          src="https://placekitten.com/300/200"
+          src="https://placekitten.com/200/200"
           alt="profile"
-          className="max-w-xs mx-auto"
+          className="max-w-xs mx-auto rounded-full"
         />
         <div className="text-center">
-          <h1 className="uppercase">Kumi</h1>
+          <h1 className="uppercase text-4xl font-bold">Kumi</h1>
+          <h2 className="uppercase font-light">{t('landing.job')}</h2>
           <div className="flex flex-row justify-center p-2 gap-2">
             {socialMedia.map((link) => (
               <SocialIcon
+                target="_blank"
+                key={link}
                 style={{ width: ' 2.5em', height: '2.5em' }}
                 url={link}
               />
             ))}
           </div>
-          <p>{t('landing.description')}</p>
 
-          {meta && <CommissionStatus meta={meta} />}
+          <CommissionStatus meta={meta} />
         </div>
       </div>
 
-      <h1 className="font-bold text-xl text-center p-4">Portfolio</h1>
-      <Showcase />
-
       <div className="flex flex-col gap-2 m-4 items-center">
-        <Link
-          to="/request"
-          className="rounded-full bg-red-100 border px-4 py-2 flex flex-row items-center gap-4"
-        >
-          Request Commission
-          <FaArrowRight />
-        </Link>
+        <LinkButton to="/request">Request Commission</LinkButton>
       </div>
+
+      <Showcase />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import { CommissionMeta } from '@commission-site/commission-shared';
 import { useTranslation } from 'react-i18next';
-import CommissionSlots from './commission-slots';
 
 export interface CommissionStatusProps {
   meta: CommissionMeta | null;
@@ -9,14 +8,16 @@ export interface CommissionStatusProps {
 export function CommissionStatus({ meta }: CommissionStatusProps) {
   const { t } = useTranslation();
 
-  const status =
-    meta && meta.commissionOpen ? (
-      <CommissionSlots meta={meta} />
-    ) : (
-      t('landing.closed')
-    );
+  const full = meta && meta.filledSlots >= meta.maxSlots;
+  const open = meta?.commissionOpen;
+  const status = open ? full && t('landing.fullSlots') : t('landing.closed');
 
-  return <p className={`pt-4 text-center font-bold text-red-800`}>{status}</p>;
+  if (!status) {
+    return <></>;
+  }
+
+  const color = !open ? 'text-red-800' : 'text-normal';
+  return <p className={`pt-4 text-center font-bold ${color}`}>{status}</p>;
 }
 
 export default CommissionStatus;
