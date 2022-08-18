@@ -7,7 +7,7 @@
       "projectType": "application",
       "targets": {
         "build": {
-          "executor": "@nrwl/web:build",
+          "executor": "@nrwl/web:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/art-commission",
@@ -23,7 +23,8 @@
             ],
             "styles": ["apps/art-commission/src/styles.scss"],
             "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "webpackConfig": "apps/art-commission/webpack.config.js",
+            "postcssConfig": "apps/art-commission/postcss.config.js"
           },
           "configurations": {
             "production": {
@@ -61,8 +62,12 @@
             "production": {
               "buildTarget": "art-commission:build:production",
               "hmr": false
+            },
+            "development": {
+              "buildTarget": "art-commission:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
@@ -75,11 +80,12 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/art-commission"],
           "options": {
-            "jestConfig": "apps/art-commission/jest.config.js",
+            "jestConfig": "apps/art-commission/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "commission-client": {
       "root": "libs/commission-client",
@@ -97,11 +103,12 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/commission-client"],
           "options": {
-            "jestConfig": "libs/commission-client/jest.config.js",
+            "jestConfig": "libs/commission-client/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "commission-cloud": {
       "projectType": "application",
@@ -134,11 +141,12 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/commission-cloud"],
           "options": {
-            "jestConfig": "apps/commission-cloud/jest.config.js",
+            "jestConfig": "apps/commission-cloud/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "commission-shared": {
       "root": "libs/commission-shared",
@@ -156,11 +164,12 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/commission-shared"],
           "options": {
-            "jestConfig": "libs/commission-shared/jest.config.js",
+            "jestConfig": "libs/commission-shared/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     },
     "lambda-commission-contact": {
       "root": "libs/lambda/commission-contact",
@@ -178,7 +187,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/lambda/commission-contact"],
           "options": {
-            "jestConfig": "libs/lambda/commission-contact/jest.config.js",
+            "jestConfig": "libs/lambda/commission-contact/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -190,7 +199,8 @@
             "outputPath": "dist/libs/lambda/commission-contact"
           }
         }
-      }
+      },
+      "tags": []
     },
     "lambda-commission-meta": {
       "root": "libs/lambda/commission-meta",
@@ -208,7 +218,7 @@
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/lambda/commission-meta"],
           "options": {
-            "jestConfig": "libs/lambda/commission-meta/jest.config.js",
+            "jestConfig": "libs/lambda/commission-meta/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -220,27 +230,8 @@
             "outputPath": "dist/libs/lambda/commission-meta"
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/react"
-  },
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint",
-        "babel": true
       },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
+      "tags": []
     }
-  },
-  "defaultProject": "art-commission"
+  }
 }

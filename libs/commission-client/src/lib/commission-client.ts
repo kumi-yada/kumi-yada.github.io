@@ -6,11 +6,13 @@ import {
 export class CommissionClient {
   constructor(private baseUrl: string, private token?: string | null) {}
 
-  async sendContactMessage(contact: CommissionContact) {
+  async sendContactMessage(contact: CommissionContact): Promise<string> {
     return fetch(`${this.baseUrl}/contact`, {
       method: 'POST',
       body: JSON.stringify(contact),
-    });
+    })
+      .then((req) => req.json())
+      .then((data) => data.id);
   }
 
   async getCommissionMeta(): Promise<CommissionMeta> {

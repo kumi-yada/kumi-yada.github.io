@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'commission-shared',
+/* eslint-disable */
+export default {
+  displayName: 'commission-client',
   preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -10,5 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/commission-shared',
+  coverageDirectory: '../../coverage/libs/commission-client',
 };

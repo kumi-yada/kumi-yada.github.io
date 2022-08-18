@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'art-commission',
   preset: '../../jest.preset.js',
   transform: {

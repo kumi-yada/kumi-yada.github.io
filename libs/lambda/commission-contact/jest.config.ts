@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'lambda-commission-contact',
   preset: '../../../jest.preset.js',
   globals: {

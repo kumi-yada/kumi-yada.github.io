@@ -12,9 +12,15 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "parallel": 1
       }
     }
   },
@@ -26,24 +32,24 @@
       }
     ]
   },
-  "projects": {
-    "art-commission": {
-      "tags": []
-    },
-    "commission-client": {
-      "tags": []
-    },
-    "commission-cloud": {
-      "tags": []
-    },
-    "commission-shared": {
-      "tags": []
-    },
-    "lambda-commission-contact": {
-      "tags": []
-    },
-    "lambda-commission-meta": {
-      "tags": []
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
     }
-  }
+  },
+  "defaultProject": "art-commission"
 }

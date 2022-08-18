@@ -39,3 +39,6 @@ testem.log
 Thumbs.db
 
 /template.yaml
+
+# Next.js
+.next

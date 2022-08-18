@@ -4,5 +4,6 @@
     "module": "commonjs",
     "types": ["node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["jest.config.ts"]
 }

@@ -20,16 +20,6 @@ export const error = (
   };
 };
 
-export const success = (
-  message: string,
-  statusCode = 200
-): APIGatewayProxyResult => {
-  return {
-    statusCode,
-    body: JSON.stringify({ message }),
-  };
-};
-
 export const handler = async ({
   body,
 }: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -42,7 +32,9 @@ export const handler = async ({
       return error('Failed to get commission meta', 500);
     }
 
-    const apiResponse = JSON.parse(String.fromCharCode.apply(null, response.Payload)) as APIGatewayProxyResult;
+    const apiResponse = JSON.parse(
+      String.fromCharCode.apply(null, response.Payload)
+    ) as APIGatewayProxyResult;
     const meta = JSON.parse(apiResponse.body) as CommissionMeta;
 
     if (!meta.commissionOpen) {
@@ -72,11 +64,18 @@ export const handler = async ({
       desc: `${contact.message}\n\nReply to ${contact.email}`,
     });
     console.log(query.toString());
-    await axios.post(`https://api.trello.com/1/cards?${query.toString()}`, null, {
-      headers: await trelloHeaders()
-    });
+    const { data } = await axios.post(
+      `https://api.trello.com/1/cards?${query.toString()}`,
+      null,
+      {
+        headers: await trelloHeaders(),
+      }
+    );
 
-    return success('Send successfully');
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ id: data.id }),
+    };
   } catch (err) {
     console.log(err);
     return error(err, 500);
