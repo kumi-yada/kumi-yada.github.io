@@ -48,6 +48,7 @@ export function LandingPage({ meta }: LandingPageProps) {
 
       <div className="flex flex-col gap-2 m-4 items-center">
         <LinkButton to="/request">Request Commission</LinkButton>
+        <LinkButton to="/tos">Terms of Service</LinkButton>
       </div>
 
       <Showcase />

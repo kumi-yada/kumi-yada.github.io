@@ -5,6 +5,7 @@ import LandingPage from './landing/landing-page';
 import { useEffect, useState } from 'react';
 import { CommissionMeta } from '@commission-site/commission-shared';
 import { ContactPage } from './contact/contact-page';
+import { Terms } from './landing/terms';
 
 const client = new CommissionClient(environment.commisionApi);
 
@@ -28,6 +29,7 @@ export function App() {
               path="request"
               element={meta && <ContactPage client={client} meta={meta} />}
             />
+            <Route path="tos" element={<Terms />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>
