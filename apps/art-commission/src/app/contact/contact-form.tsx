@@ -80,11 +80,12 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           disabled={inputDisabled}
           value={name}
           required
+          placeholder={t('contact.namePlaceholder')}
           maxLength={maxLength}
           onChange={(e) => setName(e.target.value)}
         />
 
-        <label htmlFor="contact-email">{t('contact.email')} *</label>
+        <label htmlFor="contact-email">{t('contact.contact')} *</label>
         <input
           id="contact-email"
           type="text"
@@ -93,6 +94,7 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           value={email}
           required
           maxLength={maxLength}
+          placeholder={t('contact.contactPlaceholder')}
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -105,6 +107,7 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
           required
+          placeholder={t('contact.messagePlaceholder')}
           maxLength={maxMessageLength}
         />
         <span className="text-xs text-gray-400">
@@ -114,7 +117,7 @@ export function ContactForm({ onSubmit, disabled = false }: ContactFormProps) {
         <button
           type="submit"
           disabled={inputDisabled}
-          className="disabled:bg-sky-300 bg-sky-600 p-2 rounded-sm text-white"
+          className="disabled:bg-slate-500 bg-sky-800 p-2 rounded-sm text-white"
         >
           {t('button.submit')}
         </button>

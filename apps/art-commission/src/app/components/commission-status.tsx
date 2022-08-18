@@ -10,7 +10,7 @@ export function CommissionStatusMessage({
 }: CommissionStatusMessageProps) {
   const { t } = useTranslation();
 
-  const open = meta?.commissionOpen;
+  const open = meta?.commissionOpen || true;
   const status = open ? '' : t('landing.closed');
 
   if (!status) {

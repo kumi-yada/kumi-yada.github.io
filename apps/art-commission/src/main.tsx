@@ -2,7 +2,7 @@ import i18next from 'i18next';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import common_en from './i18n/en/common.json';
 import common_de from './i18n/de/common.json';
 import common_jp from './i18n/jp/common.json';
@@ -27,9 +27,9 @@ const root = createRoot(document.getElementById('root')!);
 root.render(
   <StrictMode>
     <I18nextProvider i18n={i18next}>
-      <BrowserRouter basename={environment.baseHref}>
+      <HashRouter basename={environment.baseHref}>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </I18nextProvider>
   </StrictMode>
 );

@@ -5,8 +5,11 @@
   },
   "contact": {
     "name": "Name",
-    "email": "Email",
+    "namePlaceholder": "Your name",
+    "contact": "Contact",
+    "contactPlaceholder": "Email or social media handle to contact you",
     "message": "Message",
+    "messagePlaceholder": "Describe your request",
     "status": {
       "sent": "Thank you for your request. I will get back to you as soon as possible.",
       "error": "Failed to send the request. Try again later."
