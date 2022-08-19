@@ -12,7 +12,7 @@ const statusText: { [x: string]: string } = {
   [RequestStatus.OPEN]:
     'Your request is still open. It will be reviewed as soon as possible.',
   [RequestStatus.REVIEWED]:
-    'Your request has been reviewed. You should have been contacted for further information about your request.',
+    'Your request has been reviewed. You will be contacted for further information about your request.',
   [RequestStatus.APPROVED]:
     'Your request has been approved and is awaiting payment.',
   [RequestStatus.IN_PROGRESS]:
