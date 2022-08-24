@@ -17,6 +17,9 @@ export function Terms() {
     <div>
       <CardHeader backTo="/">Terms of Service</CardHeader>
       <div className="p-4">
+        <div className="mb-4">
+          By submitting a request, you are agreeing to the following terms.
+        </div>
         <Timeline position="alternate">
           <TimelineItem>
             <TimelineSeparator>
@@ -60,7 +63,7 @@ export function Terms() {
               Review Sketch
               <ul className="text-xs text-slate-500 list-disc list-inside">
                 <li>revisions and cancellation discussable</li>
-                <li>no major changes after sketch approved</li>
+                <li>no major changes or refunds after sketch approved</li>
               </ul>
             </TimelineContent>
           </TimelineItem>
