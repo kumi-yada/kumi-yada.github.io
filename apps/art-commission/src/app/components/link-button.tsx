@@ -1,19 +1,12 @@
 import { PropsWithChildren } from 'react';
-import { Link } from 'react-router-dom';
-import { FaArrowRight } from 'react-icons/fa';
 
-interface LinkButtonProps extends PropsWithChildren {
-  to: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface ButtonProps extends PropsWithChildren {}
 
-export function LinkButton({ to, children }: LinkButtonProps) {
+export function Button({ children }: ButtonProps) {
   return (
-    <Link
-      to={to}
-      className="rounded-full bg-sky-800 text-white px-4 py-2 flex flex-row items-center gap-4"
-    >
+    <button className="rounded-full bg-zinc-800 text-white px-8 py-4 tracking-widest flex flex-row items-center gap-4 font-light uppercase text-sm transition hover:scale-95 hover:opacity-90 duration-300">
       {children}
-      <FaArrowRight />
-    </Link>
+    </button>
   );
 }

@@ -20,8 +20,8 @@ export function App() {
   }, []);
 
   return (
-    <div className="bg-slate-900 flex grow flex-col items-center p-4 h-full">
-      <div className="flex flex-col w-full md:w-1/2 bg-white rounded-lg">
+    <div className="bg-zinc-100 flex grow flex-row justify-center h-full sm:p-16">
+      <div className="flex flex-col bg-white grow max-w-3xl">
         <Routes>
           <Route path="/">
             <Route index element={<LandingPage meta={meta} />} />

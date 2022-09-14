@@ -27,13 +27,17 @@ export function Showcase(props: ShowcaseProps) {
     return (
       <div
         key={i}
-        className="overflow-hidden bg-cover w-1/2 h-50v md:h-25v cursor-pointer"
-        style={{
-          backgroundImage: `url(${url})`,
-          backgroundPosition: 'center 25%',
-        }}
+        className="overflow-hidden w-full sm:h-50v sm:w-1/2 h-75v max-h-[25rem] cursor-pointer flex"
         onClick={() => setImageToShow(i)}
-      ></div>
+      >
+        <div
+          className="bg-cover grow hover:scale-110 transition-transform duration-300"
+          style={{
+            backgroundImage: `url(${url})`,
+            backgroundPosition: 'center center',
+          }}
+        ></div>
+      </div>
     );
   });
 

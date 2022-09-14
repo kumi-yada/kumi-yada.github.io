@@ -1,8 +1,8 @@
 import { CommissionMeta } from '@commission-site/commission-shared';
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
-import CommissionStatusMessage from '../components/commission-status';
-import { LinkButton } from '../components/link-button';
+import { HiOutlineMail, HiOutlineClipboardList } from 'react-icons/hi';
+import { Button } from '../components/link-button';
 import Showcase from './showcase';
 
 export interface LandingPageProps {
@@ -17,41 +17,53 @@ export function LandingPage({ meta }: LandingPageProps) {
     'https://www.pixiv.net/users/58480310',
     // 'https://www.instagram.com/kumi_yada93',
     // 'https://www.youtube.com/channel/UCGhrMdAkUHi_8nc7qz_nE5Q',
-    'https://kumi.fanbox.cc/',
+    // 'https://kumi.fanbox.cc/',
   ];
 
   return (
     <>
-      <div className="p-4 flex flex-col gap-4">
+      <div className="p-4 sm:p-16 flex flex-col sm:flex-row gap-8 sm:gap-16 mb-4">
         <img
           src="https://placekitten.com/200/200"
           alt="profile"
           className="max-w-xs mx-auto rounded-full"
         />
-        <div className="text-center">
-          <h1 className="uppercase text-4xl font-bold">Kumi</h1>
-          <h2 className="uppercase font-light">{t('landing.job')}</h2>
-          <div className="flex flex-row justify-center p-2 gap-2">
-            {socialMedia.map((link) => (
-              <SocialIcon
-                target="_blank"
-                key={link}
-                style={{ width: ' 2.5em', height: '2.5em' }}
-                url={link}
-              />
-            ))}
-          </div>
-
-          <CommissionStatusMessage meta={meta} />
+        <div className="flex flex-col justify-center gap-8 grow text-center sm:text-left">
+          <h1 className="uppercase text-4xl">Kumi</h1>
+          <h2 className="uppercase font-light text-sm tracking-widest">
+            {t('landing.job')}
+          </h2>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 m-4 items-center">
-        <LinkButton to="/request">Request Commission</LinkButton>
-        <LinkButton to="/tos">Terms of Service</LinkButton>
+      <Showcase />
+
+      <div className="flex flex-col gap-4 m-8 items-center">
+        <a href="mailto:kumi.yada93@gmail.com">
+          <Button>
+            <HiOutlineMail />
+            Email Me
+          </Button>
+        </a>
+        <Button>
+          <HiOutlineClipboardList />
+          Terms of Service
+        </Button>
       </div>
 
-      <Showcase />
+      <div className="flex flex-row justify-center gap-4 border-t p-8 border-zinc-100">
+        {socialMedia.map((link) => (
+          <SocialIcon
+            target="_blank"
+            key={link}
+            className="border rounded-full hover:border-zinc-600 transition hover:-translate-y-2 duration-300"
+            bgColor="transparent"
+            fgColor="rgb(39 39 42 / var(--tw-bg-opacity))"
+            style={{ width: '3.5em', height: '3.5em' }}
+            url={link}
+          />
+        ))}
+      </div>
     </>
   );
 }
