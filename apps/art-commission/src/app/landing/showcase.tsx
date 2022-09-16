@@ -43,13 +43,12 @@ export function Showcase(props: ShowcaseProps) {
 
   return (
     <>
-      {imageToShow && (
-        <ImageView
-          image={createImgUrl(imageToShow, false)}
-          name={imageToShow}
-          onClose={() => setImageToShow('')}
-        />
-      )}
+      <ImageView
+        open={!!imageToShow}
+        image={createImgUrl(imageToShow, false)}
+        name={imageToShow}
+        onClose={() => setImageToShow('')}
+      />
       <div className="flex flex-wrap">{showcase}</div>
     </>
   );
