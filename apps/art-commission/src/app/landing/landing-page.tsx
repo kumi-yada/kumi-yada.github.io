@@ -1,16 +1,18 @@
-import { CommissionMeta } from '@commission-site/commission-shared';
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
 import { HiOutlineMail, HiOutlineClipboardList } from 'react-icons/hi';
 import { Button } from '../components/link-button';
 import Showcase from './showcase';
+import { useState } from 'react';
+import { Terms } from './terms';
 
-export interface LandingPageProps {
-  meta: CommissionMeta | null;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface LandingPageProps {}
 
-export function LandingPage({ meta }: LandingPageProps) {
+export function LandingPage(props: LandingPageProps) {
   const { t } = useTranslation();
+
+  const [showTerms, setShowTerms] = useState(false);
 
   const socialMedia = [
     'https://twitter.com/kumi_yada',
@@ -45,11 +47,13 @@ export function LandingPage({ meta }: LandingPageProps) {
             Email Me
           </Button>
         </a>
-        <Button>
+        <Button onClick={() => setShowTerms(true)}>
           <HiOutlineClipboardList />
           Terms of Service
         </Button>
       </div>
+
+      <Terms open={showTerms} onClose={() => setShowTerms(false)} />
 
       <div className="flex flex-row justify-center gap-4 border-t p-8 border-zinc-100">
         {socialMedia.map((link) => (

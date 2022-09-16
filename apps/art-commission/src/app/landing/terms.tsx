@@ -11,15 +11,17 @@ import {
   Payment,
   MoveToInbox,
 } from '@mui/icons-material';
+import Modal from '../components/modal';
 
-export function Terms() {
+interface TermsProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export function Terms({ open, onClose }: TermsProps) {
   return (
-    <div>
-      <CardHeader backTo="/">Terms of Service</CardHeader>
-      <div className="p-4">
-        <div className="mb-4">
-          By submitting a request, you are agreeing to the following terms.
-        </div>
+    <Modal open={open} onClose={onClose}>
+      <div className="bg-white p-4">
         <Timeline position="alternate">
           <TimelineItem>
             <TimelineSeparator>
@@ -48,7 +50,6 @@ export function Terms() {
               Payment
               <ul className="text-xs text-slate-500 list-disc list-inside">
                 <li>full payment upfront via Paypal</li>
-                <li>refund only max 50%</li>
               </ul>
             </TimelineContent>
           </TimelineItem>
@@ -63,7 +64,7 @@ export function Terms() {
               Review Sketch
               <ul className="text-xs text-slate-500 list-disc list-inside">
                 <li>revisions and cancellation discussable</li>
-                <li>no major changes or refunds after sketch approved</li>
+                <li>no major changes after sketch approved</li>
               </ul>
             </TimelineContent>
           </TimelineItem>
@@ -83,6 +84,6 @@ export function Terms() {
           </TimelineItem>
         </Timeline>
       </div>
-    </div>
+    </Modal>
   );
 }
