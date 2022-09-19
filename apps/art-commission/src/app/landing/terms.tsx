@@ -34,8 +34,7 @@ export function Terms({ open, onClose }: TermsProps) {
               Request
               <ul className="text-xs text-slate-500 list-disc list-inside">
                 <li>for personal-use</li>
-                <li>only accept fanart of existing characters right now.</li>
-                <li>I don't take rush orders.</li>
+                <li>no rush orders</li>
               </ul>
             </TimelineContent>
           </TimelineItem>
@@ -63,7 +62,7 @@ export function Terms({ open, onClose }: TermsProps) {
             <TimelineContent>
               Review Sketch
               <ul className="text-xs text-slate-500 list-disc list-inside">
-                <li>revisions and cancellation discussable</li>
+                <li>Colored sketch for one feedback round</li>
                 <li>no major changes after sketch approved</li>
               </ul>
             </TimelineContent>
@@ -79,6 +78,7 @@ export function Terms({ open, onClose }: TermsProps) {
               <ul className="text-xs text-slate-500 list-disc list-inside">
                 <li>usually within 1-2 weeks but no guarantee</li>
                 <li>final PNG in A4 size</li>
+                <li>All Rights Reserved.</li>
               </ul>
             </TimelineContent>
           </TimelineItem>
