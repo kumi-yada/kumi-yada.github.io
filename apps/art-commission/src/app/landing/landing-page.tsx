@@ -26,9 +26,9 @@ export function LandingPage(props: LandingPageProps) {
     <>
       <div className="p-4 sm:p-16 flex flex-col sm:flex-row gap-8 sm:gap-16 mb-4">
         <img
-          src="https://placekitten.com/200/200"
+          src="https://pbs.twimg.com/profile_images/1521508196518670338/KBUxFm5N_400x400.jpg"
           alt="profile"
-          className="max-w-xs mx-auto rounded-full"
+          className="max-w-xs mx-auto rounded-full border"
         />
         <div className="flex flex-col justify-center gap-8 grow text-center sm:text-left">
           <h1 className="uppercase text-4xl">Kumi</h1>
