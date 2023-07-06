@@ -7,7 +7,8 @@ export interface ShowcaseProps {}
 
 // Newer ones on top
 const images = [
-  // 'FczL1PdXEAAz9Nz',
+  'F0X8tAHWcAAKmnY',
+  'FczL1PdXEAAz9Nz',
   'FVE4tF4XsAEUb8O',
   'FS0WGlSXEAI-8lM',
   'FQu1uPfXoAU4QEG',
