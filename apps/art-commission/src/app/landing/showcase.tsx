@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import ImageView from './image-view';
+import { FadeInSection } from '../components/fade-in-section';
 
 /* eslint-disable-next-line */
 export interface ShowcaseProps {}
 
 // Newer ones on top
 const images = [
+  // 'FczL1PdXEAAz9Nz',
   'FVE4tF4XsAEUb8O',
   'FS0WGlSXEAI-8lM',
   'FQu1uPfXoAU4QEG',
@@ -30,13 +32,15 @@ export function Showcase(props: ShowcaseProps) {
         className="overflow-hidden w-full sm:h-50v sm:w-1/2 h-75v max-h-[25rem] cursor-pointer flex"
         onClick={() => setImageToShow(i)}
       >
-        <div
-          className="bg-cover grow hover:scale-110 transition-transform duration-300"
-          style={{
-            backgroundImage: `url(${url})`,
-            backgroundPosition: 'center center',
-          }}
-        ></div>
+        <FadeInSection>
+          <div
+            className="bg-cover grow hover:scale-110 transition-transform duration-300"
+            style={{
+              backgroundImage: `url(${url})`,
+              backgroundPosition: 'center center',
+            }}
+          ></div>
+        </FadeInSection>
       </div>
     );
   });

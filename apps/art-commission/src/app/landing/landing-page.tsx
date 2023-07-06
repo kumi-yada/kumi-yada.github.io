@@ -3,14 +3,14 @@ import { SocialIcon } from 'react-social-icons';
 import { HiOutlineMail, HiOutlineClipboardList } from 'react-icons/hi';
 import { Button } from '../components/link-button';
 import Showcase from './showcase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Terms } from './terms';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LandingPageProps {}
 
 export function LandingPage(props: LandingPageProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [showTerms, setShowTerms] = useState(false);
 
@@ -22,16 +22,21 @@ export function LandingPage(props: LandingPageProps) {
     // 'https://kumi.fanbox.cc/',
   ];
 
+  useEffect(() => {
+    const userLang = navigator.language.split('-')[0];
+    i18n.changeLanguage(userLang);
+  }, []);
+
   return (
     <>
       <div className="p-4 sm:p-16 flex flex-col sm:flex-row gap-8 sm:gap-16 mb-4">
         <img
-          src="https://pbs.twimg.com/profile_images/1521508196518670338/KBUxFm5N_400x400.jpg"
+          src="https://proxy.misskeyusercontent.com/avatar.webp?url=https%3A%2F%2Fs3.arkjp.net%2Fmisskey%2F12e924de-3c23-4522-8158-33ad411337f0.png&avatar=1"
           alt="profile"
           className="max-w-xs mx-auto rounded-full border"
         />
         <div className="flex flex-col justify-center gap-8 grow text-center sm:text-left">
-          <h1 className="uppercase text-4xl">Kumi</h1>
+          <h1 className="uppercase text-4xl">{t('name')}</h1>
           <h2 className="uppercase font-light text-sm tracking-widest">
             {t('landing.job')}
           </h2>
@@ -44,12 +49,12 @@ export function LandingPage(props: LandingPageProps) {
         <a href="mailto:kumi.yada93@gmail.com">
           <Button>
             <HiOutlineMail />
-            Email Me
+            {t('landing.email-me')}
           </Button>
         </a>
         <Button onClick={() => setShowTerms(true)}>
           <HiOutlineClipboardList />
-          Terms of Service
+          {t('landing.tos')}
         </Button>
       </div>
 

@@ -5,7 +5,7 @@ import { I18nextProvider } from 'react-i18next';
 import { HashRouter } from 'react-router-dom';
 import common_en from './i18n/en/common.json';
 import common_de from './i18n/de/common.json';
-import common_jp from './i18n/jp/common.json';
+import common_ja from './i18n/ja/common.json';
 
 import App from './app/app';
 import { environment } from './environments/environment';
@@ -18,7 +18,7 @@ i18next.init({
   resources: {
     en: { common: common_en },
     de: { common: common_de },
-    jp: { common: common_jp },
+    ja: { common: common_ja },
   },
 });
 

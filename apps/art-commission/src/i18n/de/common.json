@@ -1,5 +1,8 @@
 {
+  "name": "Kumi",
   "landing": {
-    "description": "Hallo Welt"
+    "job": "Freelance Illustrator",
+    "email-me": "Email senden",
+    "tos": "Nutzungsbedingungen"
   }
 }
