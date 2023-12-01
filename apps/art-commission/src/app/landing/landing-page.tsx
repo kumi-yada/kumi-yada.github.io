@@ -1,6 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
-import { HiOutlineMail, HiOutlineClipboardList } from 'react-icons/hi';
+import {
+  HiOutlineMail,
+  HiOutlineClipboardList,
+  HiCurrencyEuro,
+  HiOutlineCurrencyEuro,
+} from 'react-icons/hi';
 import { Button } from '../components/link-button';
 import Showcase from './showcase';
 import { useEffect, useState } from 'react';
@@ -15,9 +20,9 @@ export function LandingPage(props: LandingPageProps) {
   const [showTerms, setShowTerms] = useState(false);
 
   const socialMedia = [
-    'https://twitter.com/kumi_yada',
     'https://www.pixiv.net/users/58480310',
-    // 'https://www.instagram.com/kumi_yada93',
+    'https://twitter.com/kumi_yada',
+    'https://www.instagram.com/kumi_yada93',
     // 'https://www.youtube.com/channel/UCGhrMdAkUHi_8nc7qz_nE5Q',
     // 'https://kumi.fanbox.cc/',
   ];
@@ -46,16 +51,20 @@ export function LandingPage(props: LandingPageProps) {
       <Showcase />
 
       <div className="flex flex-col gap-4 m-8 items-center">
+        <Button onClick={() => setShowTerms(true)}>
+          <HiOutlineCurrencyEuro />
+          {t('landing.prices')}
+        </Button>
+        <Button onClick={() => setShowTerms(true)}>
+          <HiOutlineClipboardList />
+          {t('landing.tos')}
+        </Button>
         <a href="mailto:kumi.yada93@gmail.com">
           <Button>
             <HiOutlineMail />
             {t('landing.email-me')}
           </Button>
         </a>
-        <Button onClick={() => setShowTerms(true)}>
-          <HiOutlineClipboardList />
-          {t('landing.tos')}
-        </Button>
       </div>
 
       <Terms open={showTerms} onClose={() => setShowTerms(false)} />
