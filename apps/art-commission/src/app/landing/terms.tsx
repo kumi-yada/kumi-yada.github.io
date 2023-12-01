@@ -1,4 +1,3 @@
-import { CardHeader } from '../components/card-header';
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -11,17 +10,16 @@ import {
   Payment,
   MoveToInbox,
 } from '@mui/icons-material';
-import Modal from '../components/modal';
+import { CardHeader } from '../components/card-header';
+import { useTranslation } from 'react-i18next';
 
-interface TermsProps {
-  open: boolean;
-  onClose: () => void;
-}
+export function TermsPage() {
+  const { t, i18n } = useTranslation();
 
-export function Terms({ open, onClose }: TermsProps) {
   return (
-    <Modal open={open} onClose={onClose}>
-      <div className="bg-white p-4">
+    <div className="flex flex-col justify-between grow">
+      <CardHeader backTo="../">{t('landing.tos')}</CardHeader>
+      <div className="py-4 grow">
         <Timeline position="alternate">
           <TimelineItem>
             <TimelineSeparator>
@@ -34,6 +32,7 @@ export function Terms({ open, onClose }: TermsProps) {
               Request
               <ul className="text-xs text-slate-500 list-disc list-inside">
                 <li>for personal-use</li>
+                <li>commercial negotiable</li>
                 <li>no rush orders</li>
               </ul>
             </TimelineContent>
@@ -48,8 +47,12 @@ export function Terms({ open, onClose }: TermsProps) {
             <TimelineContent>
               Payment
               <ul className="text-xs text-slate-500 list-disc list-inside">
-                <li>full payment upfront via Paypal</li>
+                <li>only accepting PayPal</li>
+                <li>50% payment upfront</li>
+                <li>I will be sending the invoice to you</li>
+                <li>only after receiving, I will start drawing</li>
               </ul>
+              <img src="/assets/invoice.png" />
             </TimelineContent>
           </TimelineItem>
           <TimelineItem>
@@ -65,6 +68,7 @@ export function Terms({ open, onClose }: TermsProps) {
                 <li>Colored sketch for one feedback round</li>
                 <li>no major changes after sketch approved</li>
               </ul>
+              <img src="/assets/color-sketch.png" />
             </TimelineContent>
           </TimelineItem>
           <TimelineItem>
@@ -80,10 +84,13 @@ export function Terms({ open, onClose }: TermsProps) {
                 <li>final PNG in A4 size</li>
                 <li>All Rights Reserved.</li>
               </ul>
+              <img src="/assets/final.png" />
             </TimelineContent>
           </TimelineItem>
         </Timeline>
       </div>
-    </Modal>
+
+      <CardHeader backTo="../">{t('landing.tos')}</CardHeader>
+    </div>
   );
 }

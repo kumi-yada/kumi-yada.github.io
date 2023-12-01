@@ -1,5 +1,7 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import LandingPage from './landing/landing-page';
+import { PricesPage } from './landing/prices';
+import { TermsPage } from './landing/terms';
 
 // const client = new CommissionClient(environment.commisionApi);
 
@@ -19,6 +21,8 @@ export function App() {
         <Routes>
           <Route path="/">
             <Route index element={<LandingPage />} />
+            <Route path="/prices" element={<PricesPage />} />
+            <Route path="/terms" element={<TermsPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>

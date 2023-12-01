@@ -9,15 +9,14 @@ import {
 import { Button } from '../components/link-button';
 import Showcase from './showcase';
 import { useEffect, useState } from 'react';
-import { Terms } from './terms';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LandingPageProps {}
 
 export function LandingPage(props: LandingPageProps) {
   const { t, i18n } = useTranslation();
-
-  const [showTerms, setShowTerms] = useState(false);
+  const navigate = useNavigate();
 
   const socialMedia = [
     'https://www.pixiv.net/users/58480310',
@@ -36,7 +35,7 @@ export function LandingPage(props: LandingPageProps) {
     <>
       <div className="p-4 sm:p-16 flex flex-col sm:flex-row gap-8 sm:gap-16 mb-4">
         <img
-          src="https://proxy.misskeyusercontent.com/avatar.webp?url=https%3A%2F%2Fs3.arkjp.net%2Fmisskey%2F12e924de-3c23-4522-8158-33ad411337f0.png&avatar=1"
+          src="/assets/final.png"
           alt="profile"
           className="max-w-xs mx-auto rounded-full border"
         />
@@ -51,11 +50,11 @@ export function LandingPage(props: LandingPageProps) {
       <Showcase />
 
       <div className="flex flex-col gap-4 m-8 items-center">
-        <Button onClick={() => setShowTerms(true)}>
+        <Button onClick={() => navigate('/prices')}>
           <HiOutlineCurrencyEuro />
           {t('landing.prices')}
         </Button>
-        <Button onClick={() => setShowTerms(true)}>
+        <Button onClick={() => navigate('/terms')}>
           <HiOutlineClipboardList />
           {t('landing.tos')}
         </Button>
@@ -66,8 +65,6 @@ export function LandingPage(props: LandingPageProps) {
           </Button>
         </a>
       </div>
-
-      <Terms open={showTerms} onClose={() => setShowTerms(false)} />
 
       <div className="flex flex-row justify-center gap-4 border-t p-8 border-zinc-100">
         {socialMedia.map((link) => (
