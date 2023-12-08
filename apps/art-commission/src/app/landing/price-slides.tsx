@@ -11,14 +11,13 @@ export function PriceSlides({ price, images }: PriceSlidesProps) {
   const [imageToShow, setImageToShow] = useState('');
 
   return (
-    <div className="py-4 flex flex-col">
-      <span className="p-4 font-bold text-2xl">{price}</span>
+    <div className="flex flex-col">
+      <span className="p-4 font-bold text-2xl text-center">{price}</span>
       <div className="overflow-hidden w-full h-[30rem] flex relative">
         {images.map((i, idx) => (
           <div
             key={i}
             className="bg-contain bg-no-repeat grow absolute inset-0 transition-all ease-out duration-500"
-            onClick={() => setImageToShow(i)}
             style={{
               backgroundImage: `url(${i})`,
               backgroundPosition: 'center center',

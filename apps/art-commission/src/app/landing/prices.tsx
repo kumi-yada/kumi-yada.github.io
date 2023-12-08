@@ -23,9 +23,11 @@ export function PricesPage() {
   return (
     <div className="flex flex-col justify-between grow">
       <CardHeader backTo="../">{t('landing.prices')}</CardHeader>
-      {Object.keys(prices).map((p) => (
-        <PriceSlides key={p} price={p} images={prices[p]} />
-      ))}
+      <div className="flex flex-col gap-4">
+        {Object.keys(prices).map((p) => (
+          <PriceSlides key={p} price={p} images={prices[p]} />
+        ))}
+      </div>
       <CardHeader backTo="../">{t('landing.prices')}</CardHeader>
     </div>
   );
