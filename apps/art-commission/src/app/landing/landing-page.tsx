@@ -37,7 +37,7 @@ export function LandingPage(props: LandingPageProps) {
         <img
           src="/assets/final.png"
           alt="profile"
-          className="max-w-xs mx-auto rounded-full border"
+          className="max-w-[10rem] mx-auto rounded-full border"
         />
         <div className="flex flex-col justify-center gap-8 grow text-center sm:text-left">
           <h1 className="uppercase text-4xl">{t('name')}</h1>
