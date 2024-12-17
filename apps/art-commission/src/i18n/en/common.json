@@ -1,9 +1,11 @@
 {
   "name": "Kumi",
   "landing": {
-    "job": "Freelance Illustrator",
+    "job": "Illustrator",
     "email-me": "Email Me",
     "tos": "Process",
     "prices": "Prices"
-  }
+  },
+  "en": "EN",
+  "ja": "JA"
 }

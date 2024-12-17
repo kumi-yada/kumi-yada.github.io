@@ -10,3 +10,16 @@ body,
   flex-direction: column;
   flex-grow: 1;
 }
+
+.fade-container .fade-in {
+  opacity: 0;
+  transform: translateX(2vw);
+  pointer-events: none;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, visibility;
+}
+.fade-container.open .fade-in {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}

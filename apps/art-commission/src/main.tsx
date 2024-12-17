@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { HashRouter } from 'react-router-dom';
 import common_en from './i18n/en/common.json';
-import common_de from './i18n/de/common.json';
 import common_ja from './i18n/ja/common.json';
 
 import App from './app/app';
@@ -17,7 +16,6 @@ i18next.init({
   defaultNS: 'common',
   resources: {
     en: { common: common_en },
-    de: { common: common_de },
     ja: { common: common_ja },
   },
 });
