@@ -17,7 +17,7 @@ export function App() {
 
   return (
     <div className="bg-zinc-100 flex grow flex-row justify-center h-full sm:p-16">
-      <div className="flex flex-col bg-white grow max-w-3xl relative">
+      <div className="flex flex-col bg-white grow max-w-3xl relativ sm:rounded">
         <Routes>
           <Route path="/">
             <Route index element={<LandingPage />} />

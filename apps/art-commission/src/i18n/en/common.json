@@ -6,6 +6,12 @@
     "tos": "Process",
     "prices": "Prices"
   },
+  "social": {
+    "illustrations": "Illustrations",
+    "stuff": "Random stuff",
+    "inactive": "Inactive",
+    "reels": "Speedpaints"
+  },
   "en": "EN",
   "ja": "JA"
 }

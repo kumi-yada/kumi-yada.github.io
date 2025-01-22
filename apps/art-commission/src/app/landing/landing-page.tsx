@@ -1,10 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { SocialIcon } from 'react-social-icons';
-import {
-  HiOutlineMail,
-  HiOutlineClipboardList,
-  HiOutlineCurrencyEuro,
-} from 'react-icons/hi';
+import { HiOutlineMail } from 'react-icons/hi';
 import { Button } from '../components/link-button';
 import Showcase from './showcase';
 import { useEffect, useState } from 'react';
@@ -24,10 +20,16 @@ export function LandingPage(props: LandingPageProps) {
 
   const LANGS = ['en', 'ja'];
   const socialMedia = [
-    'https://www.pixiv.net/users/58480310',
-    'https://bsky.app/profile/kumiyada.bsky.social',
-    'https://twitter.com/kumi_yada',
-    // 'https://www.instagram.com/kumi_yada93',
+    {
+      url: 'https://www.pixiv.net/users/58480310',
+      text: 'social.illustrations',
+    },
+    { url: 'https://www.youtube.com/@kumi_yada ', text: 'social.reels' },
+    {
+      url: 'https://bsky.app/profile/kumiyada.bsky.social',
+      text: 'social.stuff',
+    },
+    { url: 'https://twitter.com/kumi_yada', text: 'social.inactive' },
   ];
 
   document.addEventListener('click', () => setLangOpen(false));
@@ -95,15 +97,16 @@ export function LandingPage(props: LandingPageProps) {
       </div>
 
       <div className="flex flex-row justify-center gap-4 border-t p-8 border-zinc-100">
-        {socialMedia.map((link) => (
+        {socialMedia.map((s) => (
           <SocialIcon
             target="_blank"
-            key={link}
+            key={s.url}
             className="border rounded-full hover:border-zinc-600 transition hover:-translate-y-2 duration-300"
+            title={t(s.text)}
             bgColor="transparent"
             fgColor="rgb(39 39 42 / var(--tw-bg-opacity))"
             style={{ width: '3.5em', height: '3.5em' }}
-            url={link}
+            url={s.url}
           />
         ))}
       </div>

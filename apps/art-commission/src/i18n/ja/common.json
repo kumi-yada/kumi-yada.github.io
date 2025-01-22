@@ -6,6 +6,12 @@
     "tos": "手順",
     "prices": "値段"
   },
+  "social": {
+    "illustrations": "イラスト",
+    "stuff": "適当なポスト",
+    "inactive": "非活動",
+    "reels": "スピードペイント"
+  },
   "en": "英語",
   "ja": "日本語"
 }

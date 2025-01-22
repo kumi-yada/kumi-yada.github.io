@@ -9,6 +9,7 @@ export interface ImageViewProps {
 
 export function ImageView({ image, open, name, onClose }: ImageViewProps) {
   const imageScale = open ? 'scale-100' : 'scale-90';
+  console.log(open);
 
   return (
     <Modal open={open} onClose={onClose}>
